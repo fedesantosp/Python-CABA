@@ -1,19 +1,5 @@
 import Manejo_Menu as menu
 
-
-#Funcion que pide un valor al usuario, asumiendo que es un numero.
-#Lo valida dentro de las opciones de min y max recibidas por parametro.
-# En caso contrario lo pide nuevamente.
-def pedir_opcion(max,min=1,mensaje="Seleccione la opcion deseada para continuar: "):
-    opcion_elejida=  input(f"\n{mensaje}")
-    print()
-    opcion= int(opcion_elejida)
-
-    if valor_fuera_rango(opcion,min,max):
-       return pedir_opcion(max,min)      
-
-    return opcion
-       
 #Valida el número recibido por parametro y sus rangos, y devuelve si esta o no en rango 
 def valor_fuera_rango(opcion,min=0,max=1000000):
     invalido=False
@@ -21,23 +7,7 @@ def valor_fuera_rango(opcion,min=0,max=1000000):
         invalido=True
     return invalido
 
-#Activa la funcionalidad del menú  en base al número recibido por parametro.
-#Llamando a su respectiva funcion
-def activar_opcion(opcion):
-    
-     match opcion:
-        case 1:
-            agregar_producto()
-        case 2:
-            mostrar_productos()
-        case 3:
-            producto= input("Ingrese el nombre del Producto: ").capitalize()
-            if ya_existe(producto):
-                mostrar_objeto(buscar_producto(producto))
-            else:
-                print("No existe ese producto")
-        case 4:
-            eliminar_producto()
+
 
 #Permite agregar un producto, pidiendo nombre, categoria y precio validando cada uno
 def agregar_producto():
@@ -61,13 +31,13 @@ def pedir_nombre():
 def elegir_categoria():
     opciones_categoria= ("Bebida","Fruta","Verdura","Carne","Lácteo","Panadería","Congelado")
     menu.mostrar_lista("Categorias:",opciones_categoria)
-    categoria=pedir_opcion(len(opciones_categoria))-1
+    categoria=menu.pedir_opcion(len(opciones_categoria))-1
     return opciones_categoria[categoria]
 
 #Pide al usuario que ingrese el precio y lo valida
 def elegir_precio():
     precio_max=1000000
-    precio= pedir_opcion(precio_max,1,"Seleccione el precio del producto: ")
+    precio= menu.pedir_opcion(precio_max,1,"Seleccione el precio del producto: ")
 
     return precio
 
@@ -115,7 +85,6 @@ def eliminar_producto():
     else:
         print("No existe ese producto")
 
-    
 
 lista_productos=[["Manzana","Fruta",100],["Naranja","Fruta",230],["Brócoli","Verdura",50]
                  ,["Agua","Bebida",500],["Pollo","Carne",75]]
@@ -123,10 +92,10 @@ lista_productos=[["Manzana","Fruta",100],["Naranja","Fruta",230],["Brócoli","Ve
 opcion=0
 menu_inicio=("Agregar Producto","Mostrar Productos","Buscar producto","Eliminar Producto","Salir")
 
-while opcion!=5:
-    menu.mostrar_lista("\nMenu de Opciones",menu_inicio)
-    opcion=pedir_opcion(len(menu_inicio))   
-    activar_opcion(opcion)
-print("Saliendo del Programa...")
+if __name__ == "__main__":
+    while opcion!=5:
+        menu.mostrar_lista("\nMenu de Opciones",menu_inicio)
+        opcion=menu.pedir_opcion(len(menu_inicio))   
+        menu.activar_opcion(opcion)
 
-
+    print("Saliendo del Programa...")
