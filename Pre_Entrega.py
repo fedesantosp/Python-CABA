@@ -111,7 +111,7 @@ def buscar_producto(nombre):
         i+=1
 
     return producto_buscado
-#
+
 def eliminar_producto():
     nombre= input("Ingrese el nombre del Producto a eliminar: ").capitalize()
     if ya_existe(nombre):
