@@ -1,11 +1,5 @@
+import Manejo_Menu as menu
 
-#Funcion que muestra una lista de opciones y su nombre
-def mostrar_lista (nombre_lista,lista):
-    i=1
-    print(nombre_lista,":")
-    for opcion in lista:
-        print(f"{i}- {opcion}")
-        i+=1
 
 #Funcion que pide un valor al usuario, asumiendo que es un numero.
 #Lo valida dentro de las opciones de min y max recibidas por parametro.
@@ -66,7 +60,7 @@ def pedir_nombre():
 #Pide al usuario que elija una categoria con un menu y sus numeros
 def elegir_categoria():
     opciones_categoria= ("Bebida","Fruta","Verdura","Carne","Lácteo","Panadería","Congelado")
-    mostrar_lista("Categorias:",opciones_categoria)
+    menu.mostrar_lista("Categorias:",opciones_categoria)
     categoria=pedir_opcion(len(opciones_categoria))-1
     return opciones_categoria[categoria]
 
@@ -130,10 +124,9 @@ opcion=0
 menu_inicio=("Agregar Producto","Mostrar Productos","Buscar producto","Eliminar Producto","Salir")
 
 while opcion!=5:
-    mostrar_lista("\nMenu de Opciones",menu_inicio)
+    menu.mostrar_lista("\nMenu de Opciones",menu_inicio)
     opcion=pedir_opcion(len(menu_inicio))   
     activar_opcion(opcion)
 print("Saliendo del Programa...")
 
 
-#Hay que probar el push
