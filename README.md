@@ -14,7 +14,7 @@ La tabla 'productos' debe contener las siguientes columnas:
 
 Funcionalidades de la aplicación:
 
--Registrar nuevos productos.
+-Registrar nuevos productos. (Falta la busqueda de las categorias)
 -Visualizar datos de los productos registrados.
 -Actualizar datos de productos, mediante su ID.
 -Eliminación de productos, mediante su ID.
