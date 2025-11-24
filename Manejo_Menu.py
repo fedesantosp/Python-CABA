@@ -15,7 +15,7 @@ def mostrar_lista (nombre_lista,lista):
             fondo=Back.RED
             color=Fore.BLACK
 
-        print(f"{color}{fondo}{i}-{opcion}{Style.RESET_ALL}")
+        print(f"{color}{fondo}{i}-{opcion[0]}{Style.RESET_ALL}")
         i+=1
         fondo=Back.RESET
         color=Fore.WHITE
@@ -62,11 +62,7 @@ def activar_opcion(opcion):
         case 2:
             mostrar_productos()
         case 3:
-            producto = input("Ingrese el nombre del Producto: ").capitalize()
-            if ya_existe(producto):
-                mostrar_productos(buscar_producto(producto))
-            else:
-                print("No existe ese producto")
+           buscar_producto()
         case 4:
             eliminar_producto()
 
@@ -125,49 +121,69 @@ def elegir_precio():
 
     return precio
 
-#Voy  a preguntar si quiere agregar una o usar una previa
-#Pide al usuario que elija una categoria con un menu y sus numeros
+"""Muestra todas las categorias previamente cargadas y la opcion de craer una nueva."""
 def elegir_categoria():
     opciones_categoria= sql.buscar_categorias()
     categoria
-    if(len(opciones_categoria)>0):
+    cantOpciones=len(opciones_categoria)
+    if(cantOpciones>0):
         mostrar_lista("Categorias:",opciones_categoria)
-        categoria=pedir_opcion(len(opciones_categoria))
+    cantOpciones+=1
+    print(f"{len(cantOpciones)} -Agregar Nueva Categoria")
+    categoria=pedir_opcion(cantOpciones)
+    if(categoria!=cantOpciones):
+        
         return opciones_categoria[categoria-1]
     else:
         categoria = agregar_categoria()
         return(categoria)
 
+"""Creacion y validacion de una Categoria"""
 def agregar_categoria():
     categoria= input("Ingrese la nueva categoria: ").capitalize
-    if not (len(categoria)>4 and categoria.isalpha):
+    while (not (len(categoria)>4 and categoria.isalpha)):
+            categoria= input("Ingrese la nueva categoria: ").capitalize
+    return categoria
+   
+
 
 
 #Itera toda la lista de productos y la muestra
 def mostrar_productos():
     i=1
     print("Lista de Productos:")
-    for producto in lista_productos:
+    productos = sql.mostrar_productos()
+    for producto in productos:
         print(i,end="- ")
         mostrar_objeto(producto)
         i+=1
 
-#Muestra un objeto de la lista con formato
+
+
+"""Muestra un producto de la Base de Datos 
+nombre[0], descripcion[1], cantidad[2], precio[3], categoria[4]"""
 def mostrar_objeto(objeto):
-    print(f"Producto {objeto[0]} de la categoria {objeto[1]} tiene un precio de\t${objeto[2]}")
+    print(f"Producto: {objeto[0]} de la categoria {objeto[4]}tiene un precio de\t${objeto[3]} y cuenta con un stock de {objeto[2]}")
+    print(f"Descripcion: {objeto[1]}")
 
 #Busca un producto usando el nombre
-def buscar_producto(nombre):
-    i=0
-    producto_buscado=[]
-    while i<len(lista_productos) and not producto_buscado:
-        producto=lista_productos[i]
-        nombre_producto=producto[0]
-        if nombre_producto.capitalize() ==nombre:
-            producto_buscado=lista_productos[i]
-        i+=1
+def buscar_producto_nombre(nombre):
+  
 
     return producto_buscado
+
+#Busca un producto usando el Id
+def buscar_producto_id():
+  
+
+    return producto_buscado
+
+#Busca un producto usando la categoria
+def buscar_producto_categoria(categoria):
+  
+
+    return producto_buscado
+
 
 def eliminar_producto():
     nombre= input("Ingrese el nombre del Producto a eliminar: ").capitalize()

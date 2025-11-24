@@ -4,7 +4,7 @@ conexion= sqlite3.connect("inventario.db")
 cursor=conexion.cursor()
 
 
-#Crear Tabla
+"""Crea la  Tabla de productos, si no se creo previamente"""
 def crear_tabla():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS productos (
@@ -21,7 +21,7 @@ def crear_tabla():
 
 #Crear Producto
 def crear_producto(nombre, descripcion, cantidad, precio, categoria):
-    if(buscar_Producto(nombre) is None):
+    if(buscar_producto(nombre) is None):
         cursor.execute('''
             INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria)
             VALUES (?, ?, ?, ?, ?)
@@ -32,10 +32,30 @@ def crear_producto(nombre, descripcion, cantidad, precio, categoria):
         raise ValueError("El producto ya existe en la base de datos")
 
 
-#Buscar Producto
+"""Busca en la BD un prodcuto basado en el nombre, devuelve el primero que encuentra"""
+def buscar_producto(nombre_buscado):
+    cursor.execute('''
+    SELECT * FROM productos
+    WHERE nombre = ?
+    ''',(nombre_buscado))
 
-#Buscar Categoria
+    producto_encontrado= cursor.fetchone
+    return producto_encontrado
 
+"""Busca y devuelve la lista de ecategorias"""
+def buscar_categorias():
+    cursor.execute("""SELECT categoria FROM productos""")
+
+    categorias_encontrado= cursor.fetchall
+    return categorias_encontrado
+
+"""Traer todos los objetos cargados para mostrarlos"""
+def mostrar_productos():
+    cursor.execute('''
+    SELECT * 
+    FROM productos
+    ''')
+    return cursor.fetchall()
 
 def saliendo():
     conexion.close()
