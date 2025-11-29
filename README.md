@@ -19,9 +19,9 @@ Funcionalidades de la aplicación:
 -Actualizar datos de productos, mediante su ID. ❌ Falta
 -Eliminación de productos, mediante su ID. ⚠️ Incompleto
 -Búsqueda de productos:
-    Por el ID ⚠️ Incompleto
-    Por los campos nombre ❌ Falta
-    Por los campos categoría.❌ Falta
+    Por el ID ✅ Hecho
+    Por los campos nombre ✅ Hecho
+    Por los campos categoría.✅ Hecho
 -Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario o usuaria. ❌ Falta
 
 Interfaz de usuario: ✅ Hecho

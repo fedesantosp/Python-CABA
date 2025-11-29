@@ -19,9 +19,9 @@ def crear_tabla():
     conexion.commit()
     print("Tabla 'productos' creada con éxito")
 
-#Crear Producto
+"""Recibe los datos ya validados para crear un producto. Comprueba que el nombre no exista ya en la BD"""
 def crear_producto(nombre, descripcion, cantidad, precio, categoria):
-    if(buscar_producto(nombre) is None):
+    if(buscar_producto_nombre(nombre) is None):
         cursor.execute('''
             INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria)
             VALUES (?, ?, ?, ?, ?)
@@ -31,9 +31,8 @@ def crear_producto(nombre, descripcion, cantidad, precio, categoria):
     else:
         raise ValueError("El producto ya existe en la base de datos")
 
-
 """Busca en la BD un prodcuto basado en el nombre, devuelve el primero que encuentra"""
-def buscar_producto(nombre_buscado):
+def buscar_producto_nombre(nombre_buscado):
     cursor.execute('''
     SELECT * FROM productos
     WHERE nombre = ?
@@ -53,8 +52,7 @@ def buscar_producto_categoria(categoria):
     productos_encontrados= cursor.fetchall()
     return productos_encontrados
 
-
-"""Busca y devuelve la lista de ecategorias"""
+"""Busca y devuelve la lista de categorias"""
 def buscar_categorias():
     cursor.execute("""SELECT categoria FROM productos""")
 
@@ -78,4 +76,3 @@ def contar_productos():
 def saliendo():
     conexion.close()
     
-conexion.close()
