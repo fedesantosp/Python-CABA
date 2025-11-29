@@ -177,7 +177,7 @@ def buscar_producto():
 """Pide un id para mostrar ese producto"""
 def buscar_producto_id():
     try:
-        id=input("Ingrese el ID que desea buscar:")
+        id=int(input("Ingrese el ID que desea buscar:"))
         producto_buscado=sql.buscar_producto(id)
         if(producto_buscado is None):
             print("No existe un producto con ese Id")
@@ -208,12 +208,44 @@ def buscar_producto_categoria():
 #Actualizacion Registros:
 """Pide un ID de un producto para modificarlo"""
 def actualizar_productos():
-    pass
+    campos=("Nombre","Descripcion","Cantidad","Precio","Categoria")
+    try:
+        id=int(input("Ingrese el ID del producto que desea modificar: "))
+        producto_buscado=sql.buscar_producto(id)
+        if(producto_buscado is None):
+            print("No existe un producto con ese Id")
+        else:
+            print("Desea Modificar este producto?")
+            mostrar_objeto(producto_buscado)
+            eleccion=input("Si/No").capitalize()
+            if(eleccion=="Si"):
+                mostrar_lista("Campos Actualizables",campos)
+                opcion=pedir_opcion(len(campos))
+                match opcion:
+                    case 1:
+                        nombre=pedir_nombre()
+                        sql.actualizar_nombre_producto(id,nombre)
+                    case 2:
+                        descripcion=pedir_descripcion()
+                        sql.actualizar_descripcion_producto(id,descripcion)
+                    case 3:
+                        cantidad=pedir_cantidad()
+                        sql.actualizar_cantidad_producto(id,cantidad)
+                    case 4:
+                        precio=elegir_precio()
+                        sql.actualizar_precio_producto(id,precio)
+                    case 5:
+                        categoria=elegir_categoria()
+                        sql.actualizar_categoria_producto(id,categoria)
+
+    except ValueError:
+        print("Error: Debe ingresar un número entero.")
 
 """Pide un Id y borra el producto asociado"""
+
 def eliminar_producto():
     try:
-        id=input("Ingrese el ID del producto que desea eliminar: ")
+        id=int(input("Ingrese el ID del producto que desea eliminar: "))
         producto_buscado=sql.buscar_producto(id)
         if(producto_buscado is None):
             print("No existe un producto con ese Id")

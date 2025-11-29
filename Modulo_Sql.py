@@ -83,6 +83,36 @@ def eliminar_producto(id):
     conexion.commit()
     print(f"Producto {producto_eliminado[0]} eliminado correctamente")
 
+"""Recibe un ID y modifica el nombre"""
+def actualizar_nombre_producto(id,nombre):
+    cursor.execute('UPDATE productos SET nombre=? WHERE id=?',(nombre,id,))
+    conexion.commit()
+    print("Nombre Actualizado")
+
+"""Recibe un ID y modifica la descripción"""
+def actualizar_descripcion_producto(id,descripcion):
+    cursor.execute('UPDATE productos SET descripcion=? WHERE id=?',(descripcion,id,))
+    conexion.commit()
+    print("Descripcion Actualizada")
+
+"""Recibe un ID y modifica la cantidad"""
+def actualizar_cantidad_producto(id,cantidad):
+    cursor.execute('UPDATE productos SET cantidad=? WHERE id=?',(cantidad,id,))
+    conexion.commit()
+    print("Cantidad Actualizada")
+
+"""Recibe un ID y modifica el precio"""
+def actualizar_precio_producto(id,precio):
+    cursor.execute('UPDATE productos SET precio=? WHERE id=?',(precio,id,))
+    conexion.commit()
+    print("Precio Actualizado")
+
+"""Recibe un ID y modifica la categoria"""
+def actualizar_categoria_producto(id,categoria):
+    cursor.execute('UPDATE productos SET categoria=? WHERE id=?',(categoria,id,))
+    conexion.commit()
+    print("Categoria Actualizada")
+
 """Cierra la conexion con la BD al cerrar el programa"""
 def saliendo():
     conexion.close()
