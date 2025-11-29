@@ -205,19 +205,19 @@ def buscar_producto_categoria():
         mostrar_lista(productos_buscado)
 
 
+#Actualizacion Registros:
+"""Pide un ID de un producto para modificarlo"""
+def actualizar_productos():
+    pass
 
-
+"""Pide un Id y borra el producto asociado"""
 def eliminar_producto():
-
-    nombre= input("Ingrese el nombre del Producto a eliminar: ").capitalize()
-    if ya_existe(nombre):
-        print(f"Se elimino el producto {nombre} de la lista")
-        producto_eliminado=buscar_producto(nombre)
-        lista_productos.remove(producto_eliminado)
-    else:
-        print("No existe ese producto")
-
-
- mostrar_productos()
-    pedir_opcion(sql.contar_productos,1,"Qué producto desea ")
-        
+    try:
+        id=input("Ingrese el ID del producto que desea eliminar: ")
+        producto_buscado=sql.buscar_producto(id)
+        if(producto_buscado is None):
+            print("No existe un producto con ese Id")
+        else:
+            sql.eliminar_producto(id)
+    except ValueError:
+        print("Error: Debe ingresar un número entero.")

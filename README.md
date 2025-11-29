@@ -17,7 +17,7 @@ Funcionalidades de la aplicación:
 -Registrar nuevos productos.  ✅ Hecho
 -Visualizar datos de los productos registrados. ✅ Hecho
 -Actualizar datos de productos, mediante su ID. ❌ Falta
--Eliminación de productos, mediante su ID. ⚠️ Incompleto
+-Eliminación de productos, mediante su ID. ❌ Falta
 -Búsqueda de productos:
     Por el ID ✅ Hecho
     Por los campos nombre ✅ Hecho

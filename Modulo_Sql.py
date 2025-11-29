@@ -76,6 +76,13 @@ def contar_productos():
     
     return resultado[0]
 
+"""Recibe un ID y lo elimina de la BD"""
+def eliminar_producto(id):
+    producto_eliminado=buscar_producto(id)
+    cursor.execute('DELETE FROM productos WHERE id=?',(id,))
+    conexion.commit()
+    print(f"Producto {producto_eliminado[0]} eliminado correctamente")
+
 """Cierra la conexion con la BD al cerrar el programa"""
 def saliendo():
     conexion.close()
