@@ -1,5 +1,6 @@
 import sqlite3
-#Crear Conexión y el archivo que almacenará la base de datos
+
+"""Conecta/Crea la BD y genera la conexion"""
 conexion= sqlite3.connect("inventario.db")
 cursor=conexion.cursor()
 
@@ -47,6 +48,7 @@ def buscar_producto(id):
     producto_encontrado= cursor.fetchone()
     return producto_encontrado
 
+"""Busca y devuelve una lista de los productos con la Categoria recibida por parametro"""
 def buscar_producto_categoria(categoria):
     cursor.execute('SELECT * FROM productos WHERE categoria=?',(categoria,))
     productos_encontrados= cursor.fetchall()
@@ -67,12 +69,14 @@ def mostrar_productos():
     ''')
     return cursor.fetchall()
 
+"""Cuenta todos los registros en la BD, para determinar la cantidad de productos"""
 def contar_productos():
     cursor.execute("SELECT COUNT(*) FROM productos")
     resultado = cursor.fetchone()     
     
     return resultado[0]
 
+"""Cierra la conexion con la BD al cerrar el programa"""
 def saliendo():
     conexion.close()
     
