@@ -129,7 +129,7 @@ def elegir_categoria():
     if(cantOpciones>0):
         mostrar_lista("Categorias:",opciones_categoria)
     cantOpciones+=1
-    print(f"{len(cantOpciones)} -Agregar Nueva Categoria")
+    print(f"{cantOpciones} -Agregar Nueva Categoria")
     categoria=pedir_opcion(cantOpciones)
     if(categoria!=cantOpciones):
         
@@ -148,7 +148,7 @@ def agregar_categoria():
 
 
 
-#Itera toda la lista de productos y la muestra
+"""Muestra todos los productos registrados en la BD"""
 def mostrar_productos():
     i=1
     print("Lista de Productos:")
@@ -166,26 +166,55 @@ def mostrar_objeto(objeto):
     print(f"Producto: {objeto[0]} de la categoria {objeto[4]}tiene un precio de\t${objeto[3]} y cuenta con un stock de {objeto[2]}")
     print(f"Descripcion: {objeto[1]}")
 
-#Busca un producto usando el nombre
-def buscar_producto_nombre(nombre):
-  
+"""Pide al usuario que determine el método de Busqueda y llama a dicho metodo"""
+def buscar_producto():
+    opciones=("Busqueda por ID: ","Busqueda por Nombre: ","Busqueda por Categoria: ")
+    mostrar_lista(opciones)
+    opcion=pedir_opcion(3,1,"Eliga el método de busqueda deseado: ")
+    match opcion:
+        case 1:
+            buscar_producto_id()
+        case 2:
+            buscar_producto_nombre()
+        case 3:
+            buscar_producto_categoria()
 
-    return producto_buscado
-
-#Busca un producto usando el Id
+"""Pide un id para mostrar ese producto"""
 def buscar_producto_id():
-  
+    try:
+        id=input("Ingrese el ID que desea buscar:")
+        producto_buscado=sql.buscar_producto(id)
+        if(producto_buscado is None):
+            print("No existe un producto con ese Id")
+        else:
+            mostrar_objeto(producto_buscado)
+    except ValueError:
+        print("Error: Debe ingresar un número entero.")
 
-    return producto_buscado
+"""Pide  un nombre de producto y lo busca en la BD"""
+def buscar_producto_nombre():
+    nombre=input("Ingrese el nombre del producto que desea buscar:")
+    producto_buscado=sql.buscar_producto(nombre)
+    if(producto_buscado is None):
+        print("No existe un producto con ese Id")
+    else:
+        mostrar_objeto(producto_buscado)
 
-#Busca un producto usando la categoria
-def buscar_producto_categoria(categoria):
-  
 
-    return producto_buscado
+"""Pide que se ingrese una categoria y trae todos los productos con esa categoria de la BD"""
+def buscar_producto_categoria():
+    categoria=input("Ingrese el nombre de la categoria que desea buscar:")
+    productos_buscado=sql.buscar_producto_categoria(categoria)
+    if(productos_buscado is None):
+        print("No existe un producto con esa categoria")
+    else:
+        mostrar_lista(productos_buscado)
+
+
 
 
 def eliminar_producto():
+
     nombre= input("Ingrese el nombre del Producto a eliminar: ").capitalize()
     if ya_existe(nombre):
         print(f"Se elimino el producto {nombre} de la lista")
@@ -193,3 +222,8 @@ def eliminar_producto():
         lista_productos.remove(producto_eliminado)
     else:
         print("No existe ese producto")
+
+
+ mostrar_productos()
+    pedir_opcion(sql.contar_productos,1,"Qué producto desea ")
+        

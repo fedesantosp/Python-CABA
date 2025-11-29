@@ -37,16 +37,28 @@ def buscar_producto(nombre_buscado):
     cursor.execute('''
     SELECT * FROM productos
     WHERE nombre = ?
-    ''',(nombre_buscado))
+    ''',(nombre_buscado,))
 
-    producto_encontrado= cursor.fetchone
+    producto_encontrado= cursor.fetchone()
     return producto_encontrado
+
+"""Busca en la BD un prodcuto basado en el ID, devuelve el primero que encuentra"""
+def buscar_producto(id):
+    cursor.execute('SELECT * FROM productos WHERE id=?',(id,))
+    producto_encontrado= cursor.fetchone()
+    return producto_encontrado
+
+def buscar_producto_categoria(categoria):
+    cursor.execute('SELECT * FROM productos WHERE categoria=?',(categoria,))
+    productos_encontrados= cursor.fetchall()
+    return productos_encontrados
+
 
 """Busca y devuelve la lista de ecategorias"""
 def buscar_categorias():
     cursor.execute("""SELECT categoria FROM productos""")
 
-    categorias_encontrado= cursor.fetchall
+    categorias_encontrado= cursor.fetchall()
     return categorias_encontrado
 
 """Traer todos los objetos cargados para mostrarlos"""
@@ -56,6 +68,12 @@ def mostrar_productos():
     FROM productos
     ''')
     return cursor.fetchall()
+
+def contar_productos():
+    cursor.execute("SELECT COUNT(*) FROM productos")
+    resultado = cursor.fetchone()     
+    
+    return resultado[0]
 
 def saliendo():
     conexion.close()

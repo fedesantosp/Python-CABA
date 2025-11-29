@@ -4,7 +4,7 @@ Requerimientos
 
 -Base de datos: Crear una base de datos llamada 'inventario.db' para almacenar los datos de los productos.
 
-La tabla 'productos' debe contener las siguientes columnas:
+La tabla 'productos' debe contener las siguientes columnas:✅ Hecho
 -'id': Identificador único del producto (clave primaria, autoincremental).
 -'nombre': Nombre del producto (texto, no nulo).
 -'descripcion': Breve descripción del producto (texto).
@@ -14,14 +14,17 @@ La tabla 'productos' debe contener las siguientes columnas:
 
 Funcionalidades de la aplicación:
 
--Registrar nuevos productos. 
--Visualizar datos de los productos registrados.
--Actualizar datos de productos, mediante su ID.
--Eliminación de productos, mediante su ID.
--Búsqueda de productos, mediante su ID. De manera opcional, se puede implementar la búsqueda por los campos nombre o categoría.
--Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario o usuaria.
+-Registrar nuevos productos.  ✅ Hecho
+-Visualizar datos de los productos registrados. ✅ Hecho
+-Actualizar datos de productos, mediante su ID. ❌ Falta
+-Eliminación de productos, mediante su ID. ⚠️ Incompleto
+-Búsqueda de productos:
+    Por el ID ⚠️ Incompleto
+    Por los campos nombre ❌ Falta
+    Por los campos categoría.❌ Falta
+-Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario o usuaria. ❌ Falta
 
-Interfaz de usuario:
+Interfaz de usuario: ✅ Hecho
 
 Implementar una interfaz de usuario básica, para interactuar con la base de datos a través de la terminal.
 La interfaz debe incluir un menú principal con las opciones necesarias para acceder a cada funcionalidad descrita anteriormente.
