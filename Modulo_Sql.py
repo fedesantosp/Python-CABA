@@ -113,6 +113,12 @@ def actualizar_categoria_producto(id,categoria):
     conexion.commit()
     print("Categoria Actualizada")
 
+"""Genera una lista de productos segun el stock máximo recibido"""
+def generar_informe_stock(stock):
+    cursor.execute('SELECT * FROM productos WHERE cantidad<=?',(stock,))
+    productos_bajo_stock=cursor.fetchall()
+    return productos_bajo_stock
+
 """Cierra la conexion con la BD al cerrar el programa"""
 def saliendo():
     conexion.close()

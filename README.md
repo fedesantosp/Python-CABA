@@ -1,31 +1,56 @@
-Consignas Entrega Final:
+#SISTEMA DE GESTIÓN DE INVENTARIO - ENTREGA FINAL PYTHON
 
-Requerimientos
+AUTOR: Federico Santos Piacente
+CURSO: Talento Tech - Inicialización a la Programación con Python
 
--Base de datos: Crear una base de datos llamada 'inventario.db' para almacenar los datos de los productos.
+DESCRIPCIÓN:
+Este proyecto es una aplicación de consola para la gestión de inventario de productos. 
+Utiliza una base de datos SQLite para la persistencia de la información y permite 
+realizar todas las operaciones CRUD (Crear, Leer, Actualizar, Eliminar), además de 
+búsquedas avanzadas y reportes de stock.
 
-La tabla 'productos' debe contener las siguientes columnas:✅ Hecho
--'id': Identificador único del producto (clave primaria, autoincremental).
--'nombre': Nombre del producto (texto, no nulo).
--'descripcion': Breve descripción del producto (texto).
--'cantidad': Cantidad disponible del producto (entero, no nulo).
--'precio': Precio del producto (real, no nulo).
--'categoria': Categoría a la que pertenece el producto (texto).
+CARACTERÍSTICAS PRINCIPALES:
+---------------------------
+1. Base de Datos Relacional:
+   - Uso de SQLite3.
+   - Tabla 'productos' con campos validados (ID, nombre, descripción, cantidad, precio, categoría).
 
-Funcionalidades de la aplicación:
+2. Funcionalidades (CRUD):
+   - Registro de nuevos productos con validación de datos.
+   - Visualización del listado completo.
+   - Actualización de campos específicos de un producto.
+   - Eliminación segura de productos por ID.
 
--Registrar nuevos productos.  ✅ Hecho
--Visualizar datos de los productos registrados. ✅ Hecho
--Actualizar datos de productos, mediante su ID. ✅ Hecho
--Eliminación de productos, mediante su ID. ✅ Hecho
--Búsqueda de productos:
-    Por el ID ✅ Hecho
-    Por los campos nombre ✅ Hecho
-    Por los campos categoría.✅ Hecho
--Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario o usuaria. ❌ Falta
+3. Consultas Avanzadas:
+   - Búsqueda por ID, Nombre y Categoría.
+   - REPORTE DE BAJO STOCK: Filtra productos con cantidad igual o menor a un límite ingresado.
 
-Interfaz de usuario: ✅ Hecho
+4. Seguridad y Buenas Prácticas:
+   - Prevención de Inyección SQL mediante el uso de consultas parametrizadas (?).
+   - Manejo de errores con bloques try-except para evitar cierres inesperados.
+   - Modularización del código (Separación en Main, Menú y Módulo SQL).
 
-Implementar una interfaz de usuario básica, para interactuar con la base de datos a través de la terminal.
-La interfaz debe incluir un menú principal con las opciones necesarias para acceder a cada funcionalidad descrita anteriormente.
-Opcional: Utilizar el módulo 'colorama' para mejorar la legibilidad y experiencia de usuario en la terminal, añadiendo colores a los mensajes y opciones
+REQUISITOS DEL SISTEMA:
+-----------------------
+- Python 3.x
+- Librería externa: colorama
+
+INSTALACIÓN Y EJECUCIÓN:
+------------------------
+1. Asegúrese de tener Python instalado.
+2. Instale las dependencias necesarias ejecutando:
+   pip install colorama
+3. Ejecute el archivo principal:
+   python main.py
+
+ESTRUCTURA DE ARCHIVOS:
+-----------------------
+* main.py         -> Punto de entrada del programa. Controla el flujo principal.
+* Manejo_Menu.py  -> Contiene la lógica de interacción con el usuario y validaciones de input.
+* Modulo_Sql.py   -> Maneja la conexión a la BD y todas las consultas SQL.
+* inventario.db   -> Archivo de base de datos (se crea automáticamente al iniciar).
+
+NOTAS ADICIONALES:
+------------------
+El sistema valida que los precios no sean negativos y que los nombres de productos 
+tengan una longitud mínima para asegurar la consistencia de los datos.

@@ -45,7 +45,8 @@ def activar_opcion(opcion):
            buscar_producto()
         case 4:
             eliminar_producto()
-
+        case 5:
+            informe_stock()
 
 #Crear Producto:
 """Permite agregar un producto, pidiendo nombre, descripcion, cantidad, precio, categoria, validando que ninguno sea
@@ -159,6 +160,15 @@ def mostrar_objeto(objeto):
     print(f"Producto: {objeto[0]} de la categoria {objeto[4]}tiene un precio de\t${objeto[3]} y cuenta con un stock de {objeto[2]}")
     print(f"Descripcion: {objeto[1]}")
 
+"""Informe productos bajo Stock"""
+def informe_stock():
+    stock_minimo= pedir_opcion(10000,0,"Seleccione el stock maximo para generar el informe: ")
+    productos_bajo_stock=sql.generar_informe_stock(stock_minimo)
+    if(len(productos_bajo_stock)==0):
+        print("No hay productos con ese stock o menos")
+    else:
+        for producto in productos_bajo_stock:
+            mostrar_objeto(producto) 
 
 #Buscar:
 """Pide al usuario que determine el método de Busqueda y llama a dicho metodo"""
@@ -202,7 +212,7 @@ def buscar_producto_categoria():
     if(len(productos_buscado)==0):
         print("No existe un producto con esa categoria")
     else:
-        mostrar_lista(productos_buscado)
+        mostrar_lista("Productos con la categoria pedida",productos_buscado)
 
 
 #Actualizacion Registros:
