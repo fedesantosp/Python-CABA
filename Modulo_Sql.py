@@ -53,7 +53,7 @@ def buscar_producto(id):
 def buscar_producto_categoria(categoria):
     cursor.execute('SELECT * FROM productos WHERE categoria=?',(categoria,))
     productos_encontrados= cursor.fetchall()
-    return productos_encontrados
+    return  productos_encontrados
 
 """Busca y devuelve la lista de categorias"""
 def buscar_categorias():
