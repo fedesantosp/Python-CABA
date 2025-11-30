@@ -61,6 +61,7 @@ def agregar_producto():
         precio=elegir_precio()
         categoria=elegir_categoria()
         sql.crear_producto(nombre, descripcion, cantidad, precio, categoria)
+        print("Producto creado con éxito")
     except ValueError as e:
         print(e)
    
@@ -235,24 +236,28 @@ def actualizar_productos():
                     case 1:
                         nombre=pedir_nombre()
                         sql.actualizar_nombre_producto(id,nombre)
+                        print("Nombre Actualizado")
                     case 2:
                         descripcion=pedir_descripcion()
                         sql.actualizar_descripcion_producto(id,descripcion)
+                        print("Descripcion Actualizada")
                     case 3:
                         cantidad=pedir_cantidad()
                         sql.actualizar_cantidad_producto(id,cantidad)
+                        print("Cantidad Actualizada")
                     case 4:
                         precio=elegir_precio()
                         sql.actualizar_precio_producto(id,precio)
+                        print("Precio Actualizado")
                     case 5:
                         categoria=elegir_categoria()
                         sql.actualizar_categoria_producto(id,categoria)
+                        print("Categoria Actualizada")
 
     except ValueError:
         print("Error: Debe ingresar un número entero.")
 
 """Pide un Id y borra el producto asociado"""
-
 def eliminar_producto():
     try:
         id=int(input("Ingrese el ID del producto que desea eliminar: "))
@@ -261,5 +266,6 @@ def eliminar_producto():
             print("No existe un producto con ese Id")
         else:
             sql.eliminar_producto(id)
+            print(f"Producto {producto_buscado[0]} eliminado correctamente")
     except ValueError:
         print("Error: Debe ingresar un número entero.")
