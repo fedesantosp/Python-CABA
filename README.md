@@ -1,5 +1,5 @@
-#SISTEMA DE GESTIÓN DE INVENTARIO - ENTREGA FINAL PYTHON
-
+SISTEMA DE GESTIÓN DE INVENTARIO - ENTREGA FINAL PYTHON
+---------------------------
 AUTOR: Federico Santos Piacente
 CURSO: Talento Tech - Inicialización a la Programación con Python
 
