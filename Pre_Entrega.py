@@ -5,9 +5,9 @@ init()
 
 
 opcion=0
-menu_inicio=("Agregar Producto","Mostrar Productos","Buscar producto","Eliminar Producto","Reporte Bajo Stock","Salir")
+menu_inicio=("Agregar Producto","Mostrar Productos","Buscar producto","Actualizar Producto","Eliminar Producto","Reporte Bajo Stock","Salir")
 sql.crear_tabla()
-while opcion!=6:
+while opcion!=7:
         menu.mostrar_lista("\nMenu de Opciones",menu_inicio)
         opcion=menu.pedir_opcion(len(menu_inicio))   
         menu.activar_opcion(opcion)

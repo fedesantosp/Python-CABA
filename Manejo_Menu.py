@@ -44,8 +44,10 @@ def activar_opcion(opcion):
         case 3:
            buscar_producto()
         case 4:
-            eliminar_producto()
+            actualizar_productos()
         case 5:
+            eliminar_producto()
+        case 6:
             informe_stock()
 
 #Crear Producto:
@@ -229,7 +231,7 @@ def actualizar_productos():
         else:
             print("Desea Modificar este producto?")
             mostrar_objeto(producto_buscado)
-            eleccion=input("Si/No").capitalize()
+            eleccion=input("Si/No: ").capitalize()
             if(eleccion=="Si"):
                 mostrar_lista("Campos Actualizables",campos)
                 opcion=pedir_opcion(len(campos))
@@ -254,6 +256,8 @@ def actualizar_productos():
                         categoria=elegir_categoria()
                         sql.actualizar_categoria_producto(id,categoria)
                         print("Categoria Actualizada")
+            else:
+                print(f"{Fore.RED}Actualizacion Cancelada{Style.RESET_ALL}")
 
     except ValueError:
         print("Error: Debe ingresar un número entero.")
