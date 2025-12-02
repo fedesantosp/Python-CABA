@@ -139,18 +139,19 @@ def mostrar_lista (nombre_lista,lista):
        
 """Muestra todos los productos registrados en la BD"""
 def mostrar_productos():
-    i=1
+    
     print("Lista de Productos:")
     productos = sql.mostrar_productos()
     for producto in productos:
-        print(i,end="- ")
         mostrar_objeto(producto)
-        i+=1
+        
 
 """Muestra un producto de la Base de Datos 
-nombre[1], descripcion[2], cantidad[3], precio[4], categoria[5]"""
+id[0] nombre[1], descripcion[2], cantidad[3], precio[4], categoria[5]"""
 def mostrar_objeto(objeto):
-    
+
+    print(f"{Fore.WHITE}{Style.BRIGHT}Id:{objeto[0]}{Style.RESET_ALL}")
+
     print(f"{Fore.WHITE}{Style.BRIGHT}{objeto[1]}{Style.RESET_ALL}")
     
     print(f"{Fore.LIGHTBLACK_EX}Descripcion: {objeto[2]}{Style.RESET_ALL}")
@@ -265,6 +266,7 @@ def actualizar_productos():
 """Pide un Id y borra el producto asociado"""
 def eliminar_producto():
     try:
+        mostrar_productos()
         id=int(input("Ingrese el ID del producto que desea eliminar: "))
         producto_buscado=sql.buscar_producto(id)
         if(producto_buscado is None):
