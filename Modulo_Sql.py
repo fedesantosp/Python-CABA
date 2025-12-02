@@ -1,5 +1,6 @@
 import sqlite3
-
+import os
+print(f"PYTHON ESTÁ BUSCANDO EN: {os.getcwd()}")
 """Conecta/Crea la BD y genera la conexion"""
 conexion= sqlite3.connect("inventario.db")
 cursor=conexion.cursor()
@@ -23,15 +24,19 @@ def crear_tabla():
 
 """Recibe los datos ya validados para crear un producto. Comprueba que el nombre no exista ya en la BD"""
 def crear_producto(nombre, descripcion, cantidad, precio, categoria):
-    if(buscar_producto_nombre(nombre) is None):
-        cursor.execute('''
-            INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (nombre, descripcion, cantidad, precio, categoria))
-        conexion.commit()
-       
-    else:
-        raise ValueError("El producto ya existe en la base de datos")
+    try:
+        if(buscar_producto_nombre(nombre) is None):
+            cursor.execute('''
+                INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (nombre, descripcion, cantidad, precio, categoria))
+            conexion.commit()
+        else:
+            raise ValueError("El producto ya existe en la base de datos")
+    except Exception as e:
+        print(f"Ocurrió un error al crear el producto: {e}")
+        conexion.rollback()
+
 
 """Busca en la BD un prodcuto basado en el nombre, devuelve el primero que encuentra"""
 def buscar_producto_nombre(nombre_buscado):
@@ -79,37 +84,58 @@ def contar_productos():
 
 """Recibe un ID y lo elimina de la BD"""
 def eliminar_producto(id):
-    producto_eliminado=buscar_producto(id)
-    cursor.execute('DELETE FROM productos WHERE id=?',(id,))
-    conexion.commit()
+    try:
+        producto_eliminado=buscar_producto(id)
+        cursor.execute('DELETE FROM productos WHERE id=?',(id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al eliminar el producto: {e}")
+        conexion.rollback()
 
 """Recibe un ID y modifica el nombre"""
 def actualizar_nombre_producto(id,nombre):
-    cursor.execute('UPDATE productos SET nombre=? WHERE id=?',(nombre,id,))
-    conexion.commit()
+    try:
+        cursor.execute('UPDATE productos SET nombre=? WHERE id=?',(nombre,id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al modificar el producto: {e}")
+        conexion.rollback()
 
 """Recibe un ID y modifica la descripción"""
 def actualizar_descripcion_producto(id,descripcion):
-    cursor.execute('UPDATE productos SET descripcion=? WHERE id=?',(descripcion,id,))
-    conexion.commit()
+    try:
+        cursor.execute('UPDATE productos SET descripcion=? WHERE id=?',(descripcion,id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al modificar el producto: {e}")
+        conexion.rollback()
 
 """Recibe un ID y modifica la cantidad"""
 def actualizar_cantidad_producto(id,cantidad):
-    cursor.execute('UPDATE productos SET cantidad=? WHERE id=?',(cantidad,id,))
-    conexion.commit()
-    
+    try:
+        cursor.execute('UPDATE productos SET cantidad=? WHERE id=?',(cantidad,id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al modificar el producto: {e}")
+        conexion.rollback()
 
 """Recibe un ID y modifica el precio"""
 def actualizar_precio_producto(id,precio):
-    cursor.execute('UPDATE productos SET precio=? WHERE id=?',(precio,id,))
-    conexion.commit()
-    
+    try:
+        cursor.execute('UPDATE productos SET precio=? WHERE id=?',(precio,id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al modificar el producto: {e}")
+        conexion.rollback()
 
 """Recibe un ID y modifica la categoria"""
 def actualizar_categoria_producto(id,categoria):
-    cursor.execute('UPDATE productos SET categoria=? WHERE id=?',(categoria,id,))
-    conexion.commit()
-    
+    try:
+        cursor.execute('UPDATE productos SET categoria=? WHERE id=?',(categoria,id,))
+        conexion.commit()
+    except Exception as e:
+        print(f"Ocurrió un error al modificar el producto: {e}")
+        conexion.rollback()
 
 """Genera una lista de productos segun el stock máximo recibido"""
 def generar_informe_stock(stock):
